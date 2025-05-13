@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    word-break: break-word;
+  }
+  
+  td {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

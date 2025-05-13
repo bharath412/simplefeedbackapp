@@ -1,0 +1,30 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6">Feedback Submissions</h1>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="flex justify-center my-8">
+    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    {{ error }}
+  </div>
+
+  <!-- No feedback state -->
+  <div *ngIf="!loading && !error && feedbacks.length === 0" class="text-center py-8">
+    <p class="text-gray-600">No feedback submissions found.</p>
+  </div>
+
+  <!-- Feedback list -->
+  <div *ngIf="!loading && !error && feedbacks.length > 0" class="grid gap-4">
+    <div *ngFor="let feedback of feedbacks" class="bg-white shadow-md rounded-lg p-4 border border-gray-200">
+      <div class="flex justify-between items-start mb-2">
+        <h2 class="text-xl font-semibold">{{ feedback.name }}</h2>
+        <span class="text-sm text-gray-500">{{ feedback.createdAt | date:'medium' }}</span>
+      </div>
+      <p class="text-gray-600 mb-2">{{ feedback.email }}</p>
+      <p class="text-gray-800 mt-2">{{ feedback.message }}</p>
+    </div>
+  </div>
+</div>

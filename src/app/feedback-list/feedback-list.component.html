@@ -1,0 +1,44 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6">Feedback Submissions</h1>
+  
+  <div *ngIf="loading" class="text-center py-8">
+    <p class="text-gray-600">Loading feedback data...</p>
+  </div>
+  
+  <div *ngIf="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    <p>There was an error loading the feedback data. Please try again later.</p>
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <div *ngIf="feedbackList.length === 0" class="text-center py-8">
+      <p class="text-gray-600">No feedback submissions found.</p>
+    </div>
+    
+    <div *ngIf="feedbackList.length > 0" class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-2 px-4 border-b text-left">ID</th>
+            <th class="py-2 px-4 border-b text-left">Name</th>
+            <th class="py-2 px-4 border-b text-left">Email</th>
+            <th class="py-2 px-4 border-b text-left">Message</th>
+            <th class="py-2 px-4 border-b text-left">Submitted At</th>
+            <th class="py-2 px-4 border-b text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let feedback of feedbackList" class="hover:bg-gray-50">
+            <td class="py-2 px-4 border-b">{{ feedback.id }}</td>
+            <td class="py-2 px-4 border-b">{{ feedback.name }}</td>
+            <td class="py-2 px-4 border-b">{{ feedback.email }}</td>
+            <td class="py-2 px-4 border-b truncate max-w-xs">{{ feedback.message }}</td>
+            <td class="py-2 px-4 border-b">{{ formatDate(feedback.createdAt) }}</td>
+            <td class="py-2 px-4 border-b">
+              <a [routerLink]="['/feedback', feedback.id]" class="text-blue-600 hover:underline">View Details</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
